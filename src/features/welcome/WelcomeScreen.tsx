@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
   content: { flexGrow: 1, justifyContent: 'space-between', paddingHorizontal: spacing.xl },
   intro: { gap: 13 },
-  title: { ...typography.heading, color: colors.textStrong },
-  subtitle: { ...typography.bodyLarge, color: colors.textBody },
+  title: { ...typography.heading, color: colors.textStrong, textAlign: 'center' },
+  subtitle: { ...typography.bodyLarge, color: colors.textBody, textAlign: 'center' },
   actions: { gap: spacing.xl, marginTop: spacing['3xl'] },
   buttons: { gap: 15 },
 })

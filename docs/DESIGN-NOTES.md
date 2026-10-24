@@ -11,6 +11,7 @@ We unify the two screens into one token set. Update Figma to match these.
 | Subtitle typo          | "medicatiosn"                           | "medications"           | Typo                  |
 | Device chrome          | Status bar, home indicator in frames    | Not built (OS provides) | Native                |
 | Off-canvas layers      | "Shopee", "CLICK HERE" in Welcome frame | Not built               | Leftover              |
+| Welcome text alignment | Left-aligned title and subtitle         | Centered                | Owner's request       |
 
 ## Tokens (from Figma)
 
