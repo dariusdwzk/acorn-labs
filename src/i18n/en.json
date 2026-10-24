@@ -17,7 +17,6 @@
   "login": {
     "title": "Welcome back",
     "subtitle": "Log in to Acorn Labs to track your medications.",
-    "back": "Go back",
     "wordmark": "Acorn Labs",
     "email": {
       "label": "Email address",
@@ -51,5 +50,8 @@
   "home": {
     "title": "You're signed in",
     "signOut": "Sign out"
+  },
+  "common": {
+    "back": "Go back"
   }
 }

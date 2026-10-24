@@ -44,3 +44,7 @@ npm run check                # typecheck + lint + format + tests — run before 
 
 - `brew install gitleaks` — runs a secret scan on every commit (CI scans regardless).
 - Expo Go on a physical phone works without Xcode/Android Studio and is enough for most UI work.
+
+## 6. End-to-end tests (later)
+
+See `e2e/README.md` — Maestro flows are written but need a dev build, a bundle ID and a dev test user.

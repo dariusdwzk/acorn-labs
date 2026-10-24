@@ -11,7 +11,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
 - [x] **Phase 7 — Login UI** _(built + tested; device visual check pending)_
 - [x] **Phase 8 — Real auth** _(built + unit-tested with mocks; live login pending a dev Supabase project)_
-- [ ] Phase 9 — Stubs, E2E, review → PR to `main`
+- [ ] **Phase 9 — Stubs, E2E, review → PR to `main`** _(stubs + E2E files done; reviews + PR pending)_
 
 ## Phase summaries
 
@@ -91,3 +91,10 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - 78 tests green (storage chunking/torn writes, key refusal, error mapping, provider states, login flow, safe message on wrong password); iOS + Android bundle with env set; `expo-doctor` 20/20; `npm audit` critical gate passes.
 - Not yet verified live: needs `.env.local` with the acorn-dev URL + key, and a test account. Navigation after login/sign-out (guard handover) is untested on a device.
 - Next: Phase 9 — stubs, E2E, review. Phase 3 (database baseline) still waits on the dev project.
+
+### Phase 9 (part 1) — Stubs, back navigation, E2E
+
+- `/register` and `/forgot-password` are "coming soon" placeholders with a working back button (previously users would have been stuck). Extracted shared `BackButton` + `useGoBack` (back, or Welcome when there is no history).
+- `e2e/login.yaml` (happy path) and `e2e/login-wrong-password.yaml` (Maestro). **Written, not run** — needs a dev build, bundle ID and a dev test user. Credentials are passed on the command line only.
+- 80 tests green.
+- Next: `/code-review`, `/security-review`, `/simplify`; fix findings; open the PR to `main`.

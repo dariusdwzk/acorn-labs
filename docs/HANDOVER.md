@@ -46,6 +46,8 @@
 - Auth-gate navigation (`Stack.Protected` + `router.replace('/')`) is only unit-tested; verify on a device.
 - Supabase email confirmation setting affects login: unconfirmed users get "confirm your email".
 
+- `e2e/*.yaml` Maestro flows are **unrun**. Need: bundle ID/package in `app.json`, dev build, dev test user.
+
 ## Key decisions
 
 See `docs/decisions/`.

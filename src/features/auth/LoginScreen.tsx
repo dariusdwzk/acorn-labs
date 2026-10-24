@@ -1,15 +1,14 @@
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import { useRouter } from 'expo-router'
 import { useTranslation } from 'react-i18next'
-import { LabeledDivider, Screen, SocialButton, TextLink } from '@/components/ui'
-import { colors, minTouchTarget, spacing, typography } from '@/theme'
+import { BackButton, LabeledDivider, Screen, SocialButton, TextLink } from '@/components/ui'
+import { useGoBack } from '@/lib/navigation'
+import { colors, spacing, typography } from '@/theme'
 import AcornLogo from '../../../assets/svg/acorn-logo.svg'
-import BackChevron from '../../../assets/svg/back-chevron.svg'
 import { LoginForm } from './LoginForm'
 import { useLogin } from './useLogin'
 
 // Figma one-off layout values (Login frame 141:370).
-const NAV_HEIGHT = 64
 const BODY_TOP = 18
 const SECTION_GAP = 36
 
@@ -17,25 +16,12 @@ export function LoginScreen() {
   const { t } = useTranslation()
   const router = useRouter()
 
-  function goBack() {
-    if (router.canGoBack()) router.back()
-    else router.replace('/welcome')
-  }
-
+  const goBack = useGoBack()
   const { submit, submitting, errorKey } = useLogin()
 
   return (
     <Screen>
-      <View style={styles.nav}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t('login.back')}
-          onPress={goBack}
-          style={styles.back}
-        >
-          <BackChevron />
-        </Pressable>
-      </View>
+      <BackButton label={t('common.back')} onPress={goBack} />
 
       <View style={styles.body}>
         <View style={styles.wordmark}>
@@ -87,8 +73,6 @@ export function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  nav: { height: NAV_HEIGHT, justifyContent: 'center' },
-  back: { width: minTouchTarget, height: minTouchTarget, justifyContent: 'center' },
   body: { flexGrow: 1, paddingTop: BODY_TOP, gap: SECTION_GAP },
   wordmark: { flexDirection: 'row', alignItems: 'center', gap: 7 },
   wordmarkText: { ...typography.wordmark, color: colors.textBody },
