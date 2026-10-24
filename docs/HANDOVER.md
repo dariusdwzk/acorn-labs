@@ -56,6 +56,8 @@
 - Product spec (owner, 2026-10-24) is the source for onboarding: Apple/Google-only sign-in (email stays for dev only), name + DOB (18+), consent + privacy notice, motivation intro, add medications, notification permission, first chest/sapling. Game rules: ±2h dose window, strict adherent day, plant 0→7, missed day drops one state. Open questions are listed in the spec.
 - v1 Edge Function `supabase/functions/claude` (Anthropic proxy) is still in the repo, unused by v2 so far; needed later for label scan or remove.
 
+- Env var is `EXPO_PUBLIC_SUPABASE_KEY` (matches the name the Supabase dashboard shows under Connect → Framework); it holds the publishable key (`sb_publishable_…`) or the legacy anon key. It was briefly `EXPO_PUBLIC_SUPABASE_ANON_KEY`.
+
 ## Key decisions
 
 See `docs/decisions/`.

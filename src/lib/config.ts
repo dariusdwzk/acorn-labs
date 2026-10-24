@@ -28,7 +28,7 @@ function jwtRole(token: string): string | null {
  */
 export function parsePublicSupabaseKey(value: string | undefined): string {
   const key = value?.trim()
-  if (!key) throw new Error('EXPO_PUBLIC_SUPABASE_ANON_KEY is missing. See .env.example.')
+  if (!key) throw new Error('EXPO_PUBLIC_SUPABASE_KEY is missing. See .env.example.')
   if (key.startsWith('sb_secret_') || jwtRole(key) === 'service_role') {
     throw new Error('A secret Supabase key was supplied. Use the publishable/anon key only.')
   }
@@ -56,6 +56,6 @@ export const config = {
 export function getSupabaseConfig(): SupabaseConfig {
   return parseSupabaseConfig({
     url: process.env.EXPO_PUBLIC_SUPABASE_URL,
-    anonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+    anonKey: process.env.EXPO_PUBLIC_SUPABASE_KEY,
   })
 }
