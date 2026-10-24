@@ -2,7 +2,16 @@
   "app": {
     "name": "Acorn Labs"
   },
-  "home": {
-    "placeholder": "Acorn Labs is getting ready."
-  }
+  "welcome": {
+    "title": "Welcome to Acorn Labs",
+    "subtitle": "Your free online visit and treatment starts here.",
+    "terms": {
+      "prefix": "By joining Acorn Labs, you agree to ",
+      "link": "Program Terms and Sensitive Data Content",
+      "suffix": ". Additional terms apply for residents of Singapore"
+    },
+    "createAccount": "Create your free account",
+    "logIn": "Log in"
+  },
+  "comingSoon": "This screen is coming soon."
 }

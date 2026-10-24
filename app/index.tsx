@@ -1,15 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { useTranslation } from 'react-i18next'
+import { Redirect } from 'expo-router'
 
+// Temporary entry: always show Welcome. Replaced by the auth gate in Phase 8.
 export default function Index() {
-  const { t } = useTranslation()
-  return (
-    <View style={styles.container}>
-      <Text accessibilityRole="header">{t('home.placeholder')}</Text>
-    </View>
-  )
+  return <Redirect href="/welcome" />
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-})

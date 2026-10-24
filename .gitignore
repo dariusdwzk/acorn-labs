@@ -39,3 +39,6 @@ yarn-error.*
 
 # Claude Code local overrides
 .claude/settings.local.json
+
+# Playwright MCP output
+.playwright-mcp/

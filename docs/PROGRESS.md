@@ -8,7 +8,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [ ] Phase 3 — Database baseline (dev project, migrations, types)
 - [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
 - [x] **Phase 5 — UI primitives**
-- [ ] Phase 6 — Welcome screen
+- [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
 - [ ] Phase 7 — Login UI
 - [ ] Phase 8 — Real auth
 - [ ] Phase 9 — Stubs, E2E, review → PR to `main`
@@ -59,3 +59,14 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - `src/components/ui/`: `Button` (primary/outline, loading/disabled), `TextField`, `PasswordField` (show/hide), `TextLink`, `LabeledDivider`, `SocialButton` (apple/google), `Screen` (safe area + keyboard + scroll). Tokens only; all text/labels passed in by props (i18n happens in features).
 - 9 new component tests (press, disabled/busy, label, password toggle, a11y roles). `npm run check`: 14 tests green.
 - Not yet visually compared with Figma (assembled into screens in Phases 6–7).
+
+### Phase 6 — Welcome screen
+
+- `src/features/welcome/`: `WelcomeHero` (16 SVG layers + sky gradient, positioned from Figma node `98:612` and scaled to screen width), `WelcomeScreen`, `TermsNotice`, `heroLayers`, `canvas` (393-pt scale hook).
+- Hero is decorative → hidden from screen readers. Heading/subtitle/buttons via i18n + shared `Button`; Create account → `/register`, Log in → `/login` (placeholder "coming soon" screens until Phases 7 and 9).
+- `src/lib/config.ts`: `EXPO_PUBLIC_TERMS_URL` accepted only if a valid `https:` URL (tested vs `javascript:`/`http:`); otherwise the Terms text is not tappable.
+- Hero composition verified against the Figma render with an HTML mock-up (same coordinates) — sun, clouds, hills, trees, acorn (rotated 33.8°) match.
+- Found and fixed: Figma `download_assets` _node exports_ bake in a dark background + page gradient; the per-layer assets from `get_design_context` are the clean ones (now in `assets/svg/hero/`). Removed `design/svg`.
+- `npm run check`: 22 tests green; `expo-doctor` 20/20; iOS + Android bundles build.
+- Not yet verified on a real device/simulator (fonts, spacing, small-phone scroll). Do this when Xcode/Android Studio or Expo Go is available.
+- Next: Phase 7 — Login UI.

@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2, 4(part 1), 5 done · next Phase 6 (Welcome screen) · Phase 3 blocked on owner (acorn-dev Supabase project) · Welcome SVGs exported from Figma (in `design/svg/`) · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2, 4, 5, 6 done · next Phase 7 (Login UI) · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -10,7 +10,7 @@
 
 ## Next exact step
 
-0. All assets ready (`assets/svg/` login icons, `design/svg/` hero layers). Next: Phase 6 Welcome screen, then Phase 7 Login UI. Hero layer positions: see Figma node `98:612` (layer x/y/size in the design-context output) — verify side by side with the Figma screenshot.
+0. Run on a phone (`npm start`, Expo Go) and compare Welcome with Figma `98:612` — nothing has been seen on a device yet. Then Phase 7 Login UI (frame `141:370`; icons already in `assets/svg/`).
 
 1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
 2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.
@@ -37,6 +37,10 @@
 
 - **Figma MCP limit reached** (View seat, Professional plan) on 2026-10-24: further Figma tool calls may fail until it resets. Needed Welcome/Login data is already captured; avoid re-fetching.
 - Layer SVGs export at node-bounding-box size (e.g. meadow-1 is 366×267 though its node is 470×267) — check each against its Figma position when composing the hero.
+
+- `app/index.tsx` is a temporary redirect to `/welcome`; `/login`, `/register`, `/forgot-password` are `ComingSoon` placeholders. Phase 7 builds Login; Phase 8 replaces the redirect with the auth gate; Phase 9 refines the stubs.
+- Figma `download_assets` node exports include a baked dark background — use the clean per-layer assets from `get_design_context` instead.
+- Playwright MCP output (`.playwright-mcp/`) is git-ignored.
 
 ## Key decisions
 
