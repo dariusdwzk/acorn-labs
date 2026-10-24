@@ -98,3 +98,10 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - `e2e/login.yaml` (happy path) and `e2e/login-wrong-password.yaml` (Maestro). **Written, not run** — needs a dev build, bundle ID and a dev test user. Credentials are passed on the command line only.
 - 80 tests green.
 - Next: `/code-review`, `/security-review`, `/simplify`; fix findings; open the PR to `main`.
+
+### Phase 9 (part 2) — Security review fixes
+
+- `/security-review` found no high-confidence vulnerabilities; fixed its two hardening notes:
+  - Sign-out failure no longer silent: `signOut` returns the error, `HomeScreen` shows a message and stays put; sign-out is `scope: 'local'` (this device only). +2 tests (82 total).
+  - GitHub Actions in `ci.yml` pinned to commit SHAs (Dependabot keeps them updated).
+- Still open: `npm audit` gate at `critical` (ADR 0005).

@@ -10,7 +10,8 @@ type AuthContextValue = {
   session: Session | null
   /** Resolves with the auth error, or null on success. */
   signIn: (email: string, password: string) => Promise<AuthError | null>
-  signOut: () => Promise<void>
+  /** Signs out this device only. Resolves with the error, or null on success. */
+  signOut: () => Promise<AuthError | null>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -37,7 +38,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const signOut = useCallback(async () => {
-    await getSupabase().auth.signOut()
+    // 'local' ends only this device's session; other devices stay signed in.
+    const { error } = await getSupabase().auth.signOut({ scope: 'local' })
+    return error
   }, [])
 
   const value = useMemo<AuthContextValue>(
