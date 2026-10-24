@@ -20,6 +20,8 @@
 
 - **Docs are enforced, not optional:** any commit/PR touching code, migrations, CI or dependencies must also update `docs/PROGRESS.md` and `docs/HANDOVER.md` (pre-commit hook + CI `docs` job, ADR 0007). Keep both current as work lands — update the _State_ and _Next exact steps_ sections, not just append.
 
+- **Test commands:** `npm run check` runs everything — Jest (app), `test:db` (database/RLS via PGlite) and `test:scripts` (repo scripts). Jest deliberately ignores `supabase/` and `scripts/` (those use Node's test runner).
+
 ## Environment
 
 - Use **Node 22** for this project: `export PATH=/opt/homebrew/opt/node@22/bin:$PATH`. Machine default is Node 26 (Homebrew); both work. Details: `docs/SETUP.md`.

@@ -135,3 +135,4 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 
 - Owner asked that progress/handover are always updated. Added `scripts/docs-check.mjs` (+ 5 tests, `npm run test:scripts`, part of `npm run check`): a pre-commit hook and a new CI `docs` job fail any change to code/migrations/CI/dependencies that doesn't also change `docs/PROGRESS.md` and `docs/HANDOVER.md`. ADR 0007. Verified: a commit without docs is blocked.
 - Limits: it checks that the docs were touched, not that they are accurate (PR template checklist covers that); local bypass `SKIP_DOCS_CHECK=1` exists, CI has none (Dependabot exempt).
+- Fix: Jest now ignores `scripts/` and `supabase/` (those `*.test.mjs` files run under Node's test runner, not Jest).

@@ -74,7 +74,8 @@
       "/node_modules/",
       "/.agents/",
       "/.claude/",
-      "/supabase/"
+      "/supabase/",
+      "/scripts/"
     ]
   },
   "lint-staged": {
