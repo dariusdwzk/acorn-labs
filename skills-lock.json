@@ -120,6 +120,48 @@
       "sourceType": "github",
       "skillPath": "skills/productivity/writing-great-skills/SKILL.md",
       "computedHash": "dd555ce552f82784c3d2b8d13a8e26a6677a07ddc00032e142dec33bfd5438c6"
+    },
+    "expo-overview": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-overview/SKILL.md",
+      "pinnedCommit": "d5caf7fdf8b4854351f05841a7e315ac87ad7d24",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
+    },
+    "expo-router": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-router/SKILL.md",
+      "pinnedCommit": "d5caf7fdf8b4854351f05841a7e315ac87ad7d24",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
+    },
+    "expo-project-structure": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-project-structure/SKILL.md",
+      "pinnedCommit": "d5caf7fdf8b4854351f05841a7e315ac87ad7d24",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
+    },
+    "supabase": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase/SKILL.md",
+      "pinnedCommit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "pinnedCommit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-native-skills/SKILL.md",
+      "pinnedCommit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "vetted": "SKILL.md read + pattern scan, 2026-10-24"
     }
   }
 }
