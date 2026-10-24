@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2, 4–8 done · next Phase 9 (stubs, E2E, review) · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2–9 mostly done · Phase 3 (onboarding DB) written, not yet applied · next: onboarding screens · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -9,6 +9,8 @@
 - Official skills installed and pinned (Expo x3, Supabase x2, React Native x1).
 
 ## Next exact step
+
+**Apply the migration to `acorn-dev`** (owner, ~2 min; I can't — needs your login + DB password): `npx supabase login`, `npx supabase link --project-ref <ref>` (asks for the DB password), `npx supabase db push`. Then `npx supabase gen types typescript --linked > src/types/database.ts` (tell Claude when done).
 
 0. Run on a phone (`npm start`, Expo Go) and compare Welcome with Figma `98:612` — nothing has been seen on a device yet. Compare Login with `141:370` too. Then create `.env.local` (acorn-dev URL + publishable key) and a test user to try login live: log in → Home, kill app → still signed in, Sign out → Welcome, wrong password → friendly message.
 
@@ -50,6 +52,9 @@
 
 - Verify on a device: Android keyboard behaviour (`Screen` uses no `behavior` on Android; plan said `height`), Android hardware back on Login/Register, small-phone scroll. `useLogin` keeps an explicit `router.replace('/')` after sign-in until the gate is confirmed on a device.
 - Terms link: with `EXPO_PUBLIC_TERMS_URL` unset the text is shown but not tappable (no fake URL shipped). Set the real URL before release.
+
+- Product spec (owner, 2026-10-24) is the source for onboarding: Apple/Google-only sign-in (email stays for dev only), name + DOB (18+), consent + privacy notice, motivation intro, add medications, notification permission, first chest/sapling. Game rules: ±2h dose window, strict adherent day, plant 0→7, missed day drops one state. Open questions are listed in the spec.
+- v1 Edge Function `supabase/functions/claude` (Anthropic proxy) is still in the repo, unused by v2 so far; needed later for label scan or remove.
 
 ## Key decisions
 

@@ -5,7 +5,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [x] **Phase 0 — Safety net & reset**
 - [x] **Phase 1 — Docs & agent guardrails**
 - [x] **Phase 2 — Scaffold + CI** _(code done; branch protection + first CI run pending)_
-- [ ] Phase 3 — Database baseline (dev project, migrations, types)
+- [x] **Phase 3 — Database (onboarding scope)** _(migration written + tested; not yet applied to acorn-dev; types pending)_
 - [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
 - [x] **Phase 5 — UI primitives**
 - [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
@@ -111,3 +111,12 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - Two-axis `/code-review` (standards + spec) against the plan. Fixed: tokens for repeated control height / pressed opacity, removed dead code (`colors.social`, unused `HERO_HEIGHT` export, needless divider role), link tap targets ≥ 44pt, stable `useGoBack`, `LoginForm` message map (no nested ternary), documented the unconfirmed-email trade-off and Dependabot's react/react-native ignore.
 - Deliberately not changed: audit gate at `critical` (ADR 0005), explicit `router.replace('/')` after login, Terms link without a fake URL — all noted in HANDOVER.
 - Next: open PR `rebuild/v2` → `main`, watch the first CI run; Phase 3 waits on the dev Supabase project.
+
+### Phase 3 — Database for onboarding
+
+- Product spec received (Apple/Google sign-in, onboarding, local-first game state). Decisions: keep email login for dev; store date of birth (under-18 rejected by the DB); derive streak/plant state from dose logs (ADR 0006).
+- `supabase/migrations/20261024085526_onboarding_schema.sql`: `profiles`, `consents`, `medications` (soft delete), `medication_times` (max 4, composite FK to owner), `plants` (one growing per user), `events` (fixed names, small props). RLS + owner-only policies + least-privilege grants on every table; cascade delete from `auth.users`.
+- `npm run test:db` (PGlite, no Docker): 11 tests incl. anon denied, cross-user isolation, under-18 rejected, ≤4 dose times, one growing plant, event allowlist, cascade delete. Found and fixed a real gap: the migration now revokes default privileges before granting. Runs in CI.
+- Removed v1 `supabase-schema.sql` (superseded; still in tag `v1-final`).
+- Not done: apply to `acorn-dev` (owner: `supabase login` + `link` + `db push`), generate `src/types/database.ts`, `dose_logs`, account-deletion Edge Function.
+- Next: onboarding screens.

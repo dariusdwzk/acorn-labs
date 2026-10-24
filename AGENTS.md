@@ -21,11 +21,12 @@ Targets **iOS and Android**. Web is not a target.
 
 ## Commands (once scaffolded in Phase 2)
 
-| Command         | Purpose                                                                     |
-| --------------- | --------------------------------------------------------------------------- |
-| `npm run check` | typecheck + lint + format check + tests. **Must pass before every commit.** |
-| `npm start`     | Expo dev server                                                             |
-| `npm test`      | Jest                                                                        |
+| Command           | Purpose                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| `npm run check`   | typecheck + lint + format check + tests. **Must pass before every commit.**               |
+| `npm start`       | Expo dev server                                                                           |
+| `npm test`        | Jest                                                                                      |
+| `npm run test:db` | Applies `supabase/migrations` in an in-process Postgres (PGlite, no Docker) and tests RLS |
 
 ## Folder rules
 
