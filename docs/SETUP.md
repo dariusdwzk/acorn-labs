@@ -40,16 +40,16 @@ npm run check                # typecheck + lint + format + tests — run before 
    ```
 5. Verify: `adb devices` lists the emulator. Then `npm run android`.
 
-## 5. Google sign-in (native)
+## 5. Google sign-in (browser flow, works in Expo Go)
 
-Google sign-in needs a **dev build**, not Expo Go (`npx expo run:ios`). Setup is one-off:
+Setup is one-off and needs no env vars:
 
 1. Google Cloud → Google Auth Platform: consent screen **External**, left in _Testing_ with your test Gmail under **Audience → Test users**.
-2. Create three OAuth clients: **Web** (client ID + secret), **iOS** (bundle ID `com.acornlabs.app`), **Android** (package `com.acornlabs.app` + the SHA-1 of the signing key; the Expo debug keystore's is `5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25`). Release builds (EAS, Play Store) have their own SHA-1, so add an Android client for each.
-3. Supabase → Authentication → Sign In / Providers → Google: enable it, paste the Web client ID and secret, list all three client IDs comma-separated (Web first), and turn on **Skip nonce check**. The secret lives only here, never in the app or git.
-4. Set `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` and `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` in `.env.local` (client IDs are public). The iOS URL scheme (the reversed iOS client ID) is set in `app.json`.
+2. Create one **Web application** OAuth client. Under _Authorized redirect URIs_ add Supabase's callback (`https://<project-ref>.supabase.co/auth/v1/callback`, shown on the Google provider page).
+3. Supabase → Authentication → Sign In / Providers → Google: enable it and paste the Web client ID and secret. The secret lives only here, never in the app or git.
+4. Supabase → Authentication → URL Configuration → Redirect URLs: add `acornlabs://auth/callback` (dev/production builds) and the Expo Go URL for development, e.g. `exp://**`. PKCE makes the redirect code useless without the app's own verifier, but keep the wildcard to the dev project.
 
-Before real users sign in, move the consent screen from _Testing_ to _Production_.
+Before real users sign in, move the consent screen from _Testing_ to _Production_. Apple sign-in will need its own setup (Apple Developer account).
 
 ## 6. Optional local tools
 

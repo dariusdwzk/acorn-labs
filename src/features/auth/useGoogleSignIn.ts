@@ -1,11 +1,14 @@
 import { useCallback, useState } from 'react'
 import { useRouter } from 'expo-router'
-import { GoogleSignin, isSuccessResponse } from '@react-native-google-signin/google-signin'
-import { config } from '@/lib/config'
+import * as Linking from 'expo-linking'
+import * as WebBrowser from 'expo-web-browser'
 import { getSupabase } from '@/lib/supabase'
 import { toLoginErrorKey, type LoginErrorKey } from './authErrors'
 
-/** Signs in with Google natively, then trades the Google ID token for a Supabase session. */
+/**
+ * Signs in with Google through Supabase's browser flow (works in Expo Go): Supabase hosts the
+ * Google handshake and redirects back with a one-time code, which we trade for a session (PKCE).
+ */
 export function useGoogleSignIn() {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
@@ -15,20 +18,27 @@ export function useGoogleSignIn() {
     setSubmitting(true)
     setErrorKey(null)
     try {
-      GoogleSignin.configure({
-        webClientId: config.googleWebClientId,
-        iosClientId: config.googleIosClientId,
+      const auth = getSupabase().auth
+      const redirectTo = Linking.createURL('auth/callback')
+      const { data, error } = await auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo, skipBrowserRedirect: true },
       })
-      const response = await GoogleSignin.signIn()
-      // The user closing the Google sheet is not an error.
-      if (!isSuccessResponse(response)) return
-      const token = response.data.idToken
-      if (!token) {
+      if (error || !data.url) {
+        setErrorKey(toLoginErrorKey(error))
+        return
+      }
+      const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo)
+      // The user closing the browser is not an error.
+      if (result.type !== 'success') return
+      // `URL` is the polyfilled one: src/lib/supabase.ts loads react-native-url-polyfill.
+      const code = new URL(result.url).searchParams.get('code')
+      if (!code) {
         setErrorKey('generic')
         return
       }
-      const { error } = await getSupabase().auth.signInWithIdToken({ provider: 'google', token })
-      if (error) setErrorKey(toLoginErrorKey(error))
+      const { error: exchangeError } = await auth.exchangeCodeForSession(code)
+      if (exchangeError) setErrorKey(toLoginErrorKey(exchangeError))
       else router.replace('/')
     } catch (error) {
       setErrorKey(toLoginErrorKey(error))
