@@ -7,7 +7,9 @@
     "scheme": "acornlabs",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "ios": { "supportsTablet": false },
+    "ios": {
+      "supportsTablet": false
+    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#f0e5c5",
@@ -17,7 +19,15 @@
       },
       "predictiveBackGestureEnabled": false
     },
-    "plugins": ["expo-router", "expo-font", "expo-secure-store", "expo-localization"],
-    "experiments": { "typedRoutes": true }
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-secure-store",
+      "expo-localization",
+      "expo-splash-screen"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

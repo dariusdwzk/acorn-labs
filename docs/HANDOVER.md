@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2 (Scaffold + CI) code complete → Phase 3 next · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2 done · Phase 4 part 1 (theme/fonts) done · Phase 3 blocked on owner (acorn-dev Supabase project) · SVGs pending from owner · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -9,6 +9,8 @@
 - Official skills installed and pinned (Expo x3, Supabase x2, React Native x1).
 
 ## Next exact step
+
+0. Phase 4 part 2 needs the owner's Welcome illustration SVGs in `design/svg/`; meanwhile Phase 5 (UI primitives) can proceed using the theme.
 
 1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
 2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.
@@ -28,6 +30,10 @@
 - Bundle ID / Android package not set in `app.json` yet (needed for dev builds / stores, not Expo Go).
 - Xcode and Android Studio not installed on this machine yet (`docs/SETUP.md`).
 - React Native / Expo versions pinned by SDK 58; Dependabot ignores majors of expo/react/react-native.
+
+- React family pinned exactly (react/react-dom/react-test-renderer 19.3.0, RN 0.88.0). Don't bump one without the others; use `npx expo install --fix`.
+
+- 42dot Sans weights are ~2.6 MB each (include Korean glyphs) → ~7.8 MB of fonts in the bundle. Optimize later (Latin subset) before release.
 
 ## Key decisions
 

@@ -6,7 +6,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [x] **Phase 1 — Docs & agent guardrails**
 - [x] **Phase 2 — Scaffold + CI** _(code done; branch protection + first CI run pending)_
 - [ ] Phase 3 — Database baseline (dev project, migrations, types)
-- [ ] Phase 4 — Theme, fonts, assets
+- [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
 - [ ] Phase 5 — UI primitives
 - [ ] Phase 6 — Welcome screen
 - [ ] Phase 7 — Login UI
@@ -39,3 +39,11 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - Known: 5 high npm advisories via `@expo/cli` dev tooling — see ADR 0005.
 - Not yet verified: on a device/simulator (Xcode / Android Studio not installed yet); CI on GitHub (first run happens on PR).
 - Next: Phase 3 — database baseline (needs the free `acorn-dev` Supabase project).
+
+### Phase 4 (part 1) — Theme tokens & fonts
+
+- `src/theme/`: `colors`, `spacing`/`radius`/`minTouchTarget`, `typography` (all values from Figma), `fonts` (42dot Sans 400/500/600 + Afacad 400 via official `@expo-google-fonts`, per-weight family names for Android).
+- Root layout holds the splash screen until fonts are ready (falls back to system fonts on error).
+- Pinned the React family exactly to the SDK (`react` / `react-dom` / `react-test-renderer` 19.3.0, `react-native` 0.88.0) — fixes npm peer conflicts without `--legacy-peer-deps`.
+- Tests: token tests (colors, scale order, touch target, every text style maps to a loaded font).
+- Pending: owner's SVG illustration files → `design/svg/` (then placed via `react-native-svg`).
