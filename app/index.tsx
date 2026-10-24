@@ -1,6 +1,7 @@
 import { Redirect } from 'expo-router'
+import { useAuth } from '@/features/auth/AuthProvider'
 
-// Temporary entry: always show Welcome. Replaced by the auth gate in Phase 8.
 export default function Index() {
-  return <Redirect href="/welcome" />
+  const { status } = useAuth()
+  return <Redirect href={status === 'signedIn' ? '/home' : '/welcome'} />
 }

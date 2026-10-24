@@ -40,7 +40,16 @@
     "errors": {
       "emailRequired": "Enter your email address.",
       "emailInvalid": "Enter a valid email address.",
-      "passwordRequired": "Enter your password."
+      "passwordRequired": "Enter your password.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Please confirm your email address first.",
+      "tooManyAttempts": "Too many attempts. Please wait a moment and try again.",
+      "network": "Can't reach Acorn Labs. Check your connection and try again.",
+      "generic": "Something went wrong. Please try again."
     }
+  },
+  "home": {
+    "title": "You're signed in",
+    "signOut": "Sign out"
   }
 }

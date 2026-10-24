@@ -15,7 +15,7 @@ See [docs/SETUP.md](docs/SETUP.md) (Node 22, running on devices, simulators).
 
 ```bash
 npm ci
-cp .env.example .env.local   # DEV Supabase URL + anon key only
+cp .env.example .env.local   # DEV Supabase URL + publishable/anon key only
 npm start
 npm run check
 ```

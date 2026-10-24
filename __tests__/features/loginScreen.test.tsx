@@ -4,6 +4,8 @@ import '@/i18n'
 import { LoginScreen } from '@/features/auth/LoginScreen'
 
 const mockRouter = { push: jest.fn(), back: jest.fn(), replace: jest.fn(), canGoBack: jest.fn() }
+const mockSignIn = jest.fn()
+jest.mock('@/features/auth/AuthProvider', () => ({ useAuth: () => ({ signIn: mockSignIn }) }))
 jest.mock('expo-router', () => ({ useRouter: () => mockRouter }))
 jest.mock(
   'react-native-safe-area-context',
@@ -39,6 +41,16 @@ describe('LoginScreen', () => {
     expect(mockRouter.push).toHaveBeenLastCalledWith('/forgot-password')
     await fireEvent.press(screen.getByRole('link', { name: 'Create an account' }))
     expect(mockRouter.push).toHaveBeenLastCalledWith('/register')
+  })
+
+  it('shows a safe message when the credentials are wrong', async () => {
+    mockSignIn.mockResolvedValue({ code: 'invalid_credentials', message: 'raw backend text' })
+    await render(<LoginScreen />)
+    await fireEvent.changeText(screen.getByLabelText('Email address'), 'user@example.com')
+    await fireEvent.changeText(screen.getByLabelText('Password'), 'wrong')
+    await fireEvent.press(screen.getByRole('button', { name: 'Log in' }))
+    expect(await screen.findByText('Email or password is incorrect.')).toBeOnTheScreen()
+    expect(screen.queryByText('raw backend text')).not.toBeOnTheScreen()
   })
 
   it('tells the user social sign-in is coming soon', async () => {

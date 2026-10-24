@@ -10,7 +10,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [x] **Phase 5 — UI primitives**
 - [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
 - [x] **Phase 7 — Login UI** _(built + tested; device visual check pending)_
-- [ ] Phase 8 — Real auth
+- [x] **Phase 8 — Real auth** _(built + unit-tested with mocks; live login pending a dev Supabase project)_
 - [ ] Phase 9 — Stubs, E2E, review → PR to `main`
 
 ## Phase summaries
@@ -81,3 +81,13 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - 44 tests green (validation, form behaviour, screen navigation); iOS + Android bundle.
 - Not yet verified on a device vs Figma `141:370`.
 - Next: Phase 8 — real auth.
+
+### Phase 8 — Real auth
+
+- `src/lib/secureStorage.ts`: Supabase session stored in Keychain/Keystore via chunked `expo-secure-store` (ADR 0004 updated). `src/lib/supabase.ts`: single lazily-created client, foreground-only token refresh (`AppState`).
+- `src/lib/config.ts`: validated Supabase URL (https only) and key; **refuses `service_role` JWTs and `sb_secret_` keys** so a secret can't ship in the bundle.
+- `AuthProvider` / `useAuth` (loading → signedIn / signedOut from `onAuthStateChange`), `useLogin` (submit, in-flight state, safe error key), `authErrors` (maps Supabase error codes to generic messages; never shows raw backend text).
+- Root layout: auth gate with `Stack.Protected` — `(app)` only when signed in, `(public)` only when signed out; splash held until fonts + session are ready. `/` redirects to `/home` or `/welcome`. Placeholder `HomeScreen` with Sign out.
+- 78 tests green (storage chunking/torn writes, key refusal, error mapping, provider states, login flow, safe message on wrong password); iOS + Android bundle with env set; `expo-doctor` 20/20; `npm audit` critical gate passes.
+- Not yet verified live: needs `.env.local` with the acorn-dev URL + key, and a test account. Navigation after login/sign-out (guard handover) is untested on a device.
+- Next: Phase 9 — stubs, E2E, review. Phase 3 (database baseline) still waits on the dev project.

@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { useTranslation } from 'react-i18next'
 import { Button, PasswordField, TextField, TextLink, type TextInputHandle } from '@/components/ui'
-import { spacing } from '@/theme'
+import { colors, spacing, typography } from '@/theme'
 import { validateEmail, validatePassword, type FieldError } from './validation'
 
 export type Credentials = { email: string; password: string }
@@ -11,9 +11,11 @@ type Props = {
   onSubmit: (credentials: Credentials) => void | Promise<void>
   onForgotPassword: () => void
   submitting?: boolean
+  /** Safe, already-translated message for a failed sign-in. */
+  formError?: string
 }
 
-export function LoginForm({ onSubmit, onForgotPassword, submitting = false }: Props) {
+export function LoginForm({ onSubmit, onForgotPassword, submitting = false, formError }: Props) {
   const { t } = useTranslation()
   const passwordRef = useRef<TextInputHandle>(null)
   const [email, setEmail] = useState('')
@@ -78,6 +80,11 @@ export function LoginForm({ onSubmit, onForgotPassword, submitting = false }: Pr
       <View style={styles.recovery}>
         <TextLink label={t('login.forgot')} onPress={onForgotPassword} />
       </View>
+      {formError ? (
+        <Text accessibilityRole="alert" style={styles.formError}>
+          {formError}
+        </Text>
+      ) : null}
       <Button label={t('login.submit')} onPress={handleSubmit} loading={submitting} />
     </View>
   )
@@ -86,4 +93,5 @@ export function LoginForm({ onSubmit, onForgotPassword, submitting = false }: Pr
 const styles = StyleSheet.create({
   form: { gap: spacing.xl },
   recovery: { alignItems: 'flex-end' },
+  formError: { ...typography.label, color: colors.error },
 })

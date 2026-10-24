@@ -5,7 +5,8 @@ import { LabeledDivider, Screen, SocialButton, TextLink } from '@/components/ui'
 import { colors, minTouchTarget, spacing, typography } from '@/theme'
 import AcornLogo from '../../../assets/svg/acorn-logo.svg'
 import BackChevron from '../../../assets/svg/back-chevron.svg'
-import { LoginForm, type Credentials } from './LoginForm'
+import { LoginForm } from './LoginForm'
+import { useLogin } from './useLogin'
 
 // Figma one-off layout values (Login frame 141:370).
 const NAV_HEIGHT = 64
@@ -21,8 +22,7 @@ export function LoginScreen() {
     else router.replace('/welcome')
   }
 
-  // Real authentication is wired in Phase 8 (useLogin). Until then submitting does nothing.
-  function handleSubmit(_credentials: Credentials) {}
+  const { submit, submitting, errorKey } = useLogin()
 
   return (
     <Screen>
@@ -51,7 +51,9 @@ export function LoginScreen() {
         </View>
 
         <LoginForm
-          onSubmit={handleSubmit}
+          onSubmit={submit}
+          submitting={submitting}
+          formError={errorKey ? t(`login.errors.${errorKey}`) : undefined}
           onForgotPassword={() => router.push('/forgot-password')}
         />
 

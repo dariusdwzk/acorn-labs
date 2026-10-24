@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2, 4, 5, 6, 7 done · next Phase 8 (real auth) · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2, 4–8 done · next Phase 9 (stubs, E2E, review) · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -10,7 +10,7 @@
 
 ## Next exact step
 
-0. Run on a phone (`npm start`, Expo Go) and compare Welcome with Figma `98:612` — nothing has been seen on a device yet. Compare Login with `141:370` too. Then Phase 8 real auth (needs the acorn-dev Supabase URL + anon key in `.env.local` to test live).
+0. Run on a phone (`npm start`, Expo Go) and compare Welcome with Figma `98:612` — nothing has been seen on a device yet. Compare Login with `141:370` too. Then create `.env.local` (acorn-dev URL + publishable key) and a test user to try login live: log in → Home, kill app → still signed in, Sign out → Welcome, wrong password → friendly message.
 
 1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
 2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.
@@ -42,7 +42,9 @@
 - Figma `download_assets` node exports include a baked dark background — use the clean per-layer assets from `get_design_context` instead.
 - Playwright MCP output (`.playwright-mcp/`) is git-ignored.
 
-- Login submit is a no-op placeholder (`LoginScreen.handleSubmit`) until Phase 8.
+- Login now calls Supabase (`useLogin`). Untested live — needs `.env.local`. The app **throws at startup** with a clear message if the Supabase env is missing/invalid (by design).
+- Auth-gate navigation (`Stack.Protected` + `router.replace('/')`) is only unit-tested; verify on a device.
+- Supabase email confirmation setting affects login: unconfirmed users get "confirm your email".
 
 ## Key decisions
 
