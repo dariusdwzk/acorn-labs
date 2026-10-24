@@ -42,3 +42,7 @@ yarn-error.*
 
 # Playwright MCP output
 .playwright-mcp/
+
+# Owner's local working notes (not shared with the team repo)
+docs/PROGRESS.md
+docs/HANDOVER.md

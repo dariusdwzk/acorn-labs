@@ -1,6 +1,6 @@
-# 0007 — Enforce progress/handover updates with a hook and CI
+# 0007 — Progress/handover notes are local-only (supersedes the enforcement idea)
 
-**Status:** accepted (owner request, 2026-10-24)
-**Context:** Instructions in CLAUDE.md and agent memory ("update docs as you go") get forgotten, and the handover file drifted out of date once already.
-**Decision:** `scripts/docs-check.mjs` fails when a change touches code (`src/`, `app/`, `supabase/migrations|functions`, `e2e/`, `.github/workflows`, `package.json`, `app.json`) without also changing `docs/PROGRESS.md` and `docs/HANDOVER.md`. It runs in the pre-commit hook (staged files; local bypass `SKIP_DOCS_CHECK=1`) and in CI on pull requests (no bypass; Dependabot exempt). Unit-tested with `npm run test:scripts`.
-**Consequences:** Every code commit carries at least a short docs touch. It can't verify the docs are _accurate_ — that stays a review item (PR template checklist). Docs-only and test-only changes are not blocked.
+**Status:** accepted (owner decision, 2026-10-24)
+**Context:** We briefly enforced updates to `docs/PROGRESS.md` and `docs/HANDOVER.md` with a pre-commit hook and a CI job. The owner prefers these working notes to stay private rather than be shared with the team repo.
+**Decision:** Both files are git-ignored and live only in the owner's clone; the enforcement was removed (it needs the files committed). Agents keep them up to date as an explicit instruction (`CLAUDE.md`), not a gate.
+**Consequences:** Teammates see decisions through ADRs, `docs/SETUP.md`, `docs/DESIGN-NOTES.md` and `AGENTS.md`, not progress logs. Nothing mechanically stops the local notes going stale. The files still appear in earlier commits on `rebuild/v2` (history was not rewritten).

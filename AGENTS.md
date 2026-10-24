@@ -15,7 +15,7 @@ Targets **iOS and Android**. Web is not a target.
 
 ## Before you start any task
 
-1. Read `docs/HANDOVER.md` (where we are) and `docs/PROGRESS.md` (what is done).
+1. If you have them, read your local, git-ignored working notes `docs/HANDOVER.md` (where we are) and `docs/PROGRESS.md` (what is done). They are the owner's private notes and may not exist in your clone.
 2. Work on **one phase at a time**. Ask clarifying questions before coding; plan before editing.
 3. Never commit to `main`. Branch → PR → green CI → merge.
 
@@ -40,7 +40,7 @@ src/lib/             clients and config (supabase, secureStorage, config)
 src/i18n/            translation files (en.json)
 src/types/           generated DB types — never hand-edit
 supabase/            migrations/ + functions/ (the backend, in git)
-docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs)
+docs/                SETUP, DESIGN-NOTES, PROMPTS, decisions/ (ADRs); local-only PROGRESS + HANDOVER (git-ignored)
 ```
 
 ## Code standards
@@ -73,11 +73,11 @@ docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs
 Each phase = one small PR. End every phase with:
 
 1. `npm run check` green.
-2. A 3–5 line summary in `docs/PROGRESS.md` (what changed, files, how to verify, next).
-3. `docs/HANDOVER.md` updated.
+2. A 3–5 line summary in the local `docs/PROGRESS.md` (what changed, files, how to verify, next).
+3. Local `docs/HANDOVER.md` updated.
 4. One conventional commit — only after the owner approves.
 
-**Keep docs current as you go**, not just at phase end: update `docs/PROGRESS.md`, `docs/HANDOVER.md`, `docs/DESIGN-NOTES.md`, ADRs and this file whenever a decision, command or rule changes. **This is enforced:** the pre-commit hook and a CI job (`docs`) fail any commit/PR that changes `src/`, `app/`, `supabase/migrations|functions`, `e2e/`, `.github/workflows`, `package.json` or `app.json` without also changing `docs/PROGRESS.md` and `docs/HANDOVER.md` (`scripts/docs-check.mjs`). Dependabot PRs are exempt; `SKIP_DOCS_CHECK=1 git commit` bypasses the hook locally in an emergency (CI still checks).
+**Keep docs current as you go**, not just at phase end: update the shared docs (`docs/DESIGN-NOTES.md`, ADRs, `docs/SETUP.md`, this file) whenever a decision, command or rule changes, and the owner's local `docs/PROGRESS.md` / `docs/HANDOVER.md` after every meaningful step. Those two are git-ignored (not shared with the team), so nothing enforces them — it is on the agent to keep them current.
 
 ## Definition of done
 

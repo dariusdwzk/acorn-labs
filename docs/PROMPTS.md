@@ -3,7 +3,7 @@
 ## Phase prompt
 
 ```
-Read AGENTS.md, docs/HANDOVER.md and docs/PROGRESS.md first.
+Read AGENTS.md first, plus my local docs/HANDOVER.md and docs/PROGRESS.md if present.
 Goal: Phase <N> — <name>. Scope: <bullets>. Out of scope: <bullets>.
 1. Grill me: ask every clarifying question in one batch before any code.
 2. Plan: list files to create/change, one line of purpose each. Wait for my OK.
@@ -11,7 +11,7 @@ Goal: Phase <N> — <name>. Scope: <bullets>. Out of scope: <bullets>.
    no new dependency without asking, no secrets, never log PII/tokens.
 4. Tests first for any logic; run `npm run check` and show the output.
 5. Verify on iOS and Android; self-review the diff (secrets, errors, dead code, a11y).
-6. Update docs/PROGRESS.md (3–5 lines) and docs/HANDOVER.md; propose a commit message. Don't commit until I say so.
+6. Update my local docs/PROGRESS.md (3–5 lines) and docs/HANDOVER.md (git-ignored, never commit them); propose a commit message. Don't commit until I say so.
 ```
 
 ## Bug fix

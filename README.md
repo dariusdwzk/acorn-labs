@@ -7,7 +7,7 @@ Built with Expo (React Native + TypeScript) and Supabase, for iOS and Android.
 
 ## For contributors (humans and AI agents)
 
-Start with [AGENTS.md](AGENTS.md), then [docs/HANDOVER.md](docs/HANDOVER.md) and [docs/PROGRESS.md](docs/PROGRESS.md).
+Start with [AGENTS.md](AGENTS.md) and [docs/SETUP.md](docs/SETUP.md); design decisions are in [docs/decisions/](docs/decisions/).
 
 ## Setup
 

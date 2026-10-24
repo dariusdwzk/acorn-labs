@@ -4,5 +4,3 @@ if command -v gitleaks >/dev/null 2>&1; then
 else
   echo "warning: gitleaks not installed locally (brew install gitleaks); CI will still scan."
 fi
-# Keep docs/PROGRESS.md and docs/HANDOVER.md current whenever code changes.
-[ -n "$SKIP_DOCS_CHECK" ] || git diff --cached --name-only | node scripts/docs-check.mjs || exit 1
