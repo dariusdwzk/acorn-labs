@@ -51,11 +51,20 @@ Setup is one-off and needs no env vars:
 
 Before real users sign in, move the consent screen from _Testing_ to _Production_. Apple sign-in will need its own setup (Apple Developer account).
 
-## 6. Optional local tools
+## 6. Trying the app (teammates)
+
+1. Do §1–2: Node 22, `npm ci`, and a `.env.local` with the dev Supabase URL and publishable key (ask the owner; both are public values).
+2. Install **Expo Go** on your phone, put the phone on the **same Wi-Fi** as your computer, run `npm start`, and scan the QR code.
+3. Log in with the shared email test account (ask the owner; never commit credentials), or with Google. For Google the owner must first add your Gmail under Google Cloud → Audience → Test users.
+4. It is a shared dev database: test data only, never real patient data.
+
+Expo Go works only while your dev server runs. For installable builds later, use EAS (free Android APK; iPhone TestFlight needs the paid Apple Developer account).
+
+## 7. Optional local tools
 
 - `brew install gitleaks` — runs a secret scan on every commit (CI scans regardless).
 - Expo Go on a physical phone works without Xcode/Android Studio and is enough for most UI work.
 
-## 7. End-to-end tests (later)
+## 8. End-to-end tests (later)
 
 See `e2e/README.md` — Maestro flows are written but need a dev build, a bundle ID and a dev test user.
