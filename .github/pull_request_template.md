@@ -13,6 +13,6 @@
 - [ ] No secrets, tokens or PII in code or logs
 - [ ] New tables have RLS + owner policy (if applicable)
 - [ ] User-facing text goes through `t()`; tokens only (no raw colors/sizes)
-- [ ] `docs/PROGRESS.md` and `docs/HANDOVER.md` updated
+- [ ] `docs/PROGRESS.md` and `docs/HANDOVER.md` updated (CI fails the PR if code changed without them)
 
 ## Screenshots (iOS / Android)

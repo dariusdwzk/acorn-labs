@@ -21,12 +21,13 @@ Targets **iOS and Android**. Web is not a target.
 
 ## Commands (once scaffolded in Phase 2)
 
-| Command           | Purpose                                                                                   |
-| ----------------- | ----------------------------------------------------------------------------------------- |
-| `npm run check`   | typecheck + lint + format check + tests. **Must pass before every commit.**               |
-| `npm start`       | Expo dev server                                                                           |
-| `npm test`        | Jest                                                                                      |
-| `npm run test:db` | Applies `supabase/migrations` in an in-process Postgres (PGlite, no Docker) and tests RLS |
+| Command                | Purpose                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| `npm run check`        | typecheck + lint + format check + tests. **Must pass before every commit.**               |
+| `npm start`            | Expo dev server                                                                           |
+| `npm test`             | Jest                                                                                      |
+| `npm run test:scripts` | Tests for the repo's own scripts (e.g. the docs check)                                    |
+| `npm run test:db`      | Applies `supabase/migrations` in an in-process Postgres (PGlite, no Docker) and tests RLS |
 
 ## Folder rules
 
@@ -76,7 +77,7 @@ Each phase = one small PR. End every phase with:
 3. `docs/HANDOVER.md` updated.
 4. One conventional commit — only after the owner approves.
 
-**Keep docs current as you go**, not just at phase end: update `docs/PROGRESS.md`, `docs/HANDOVER.md`, `docs/DESIGN-NOTES.md`, ADRs and this file whenever a decision, command or rule changes.
+**Keep docs current as you go**, not just at phase end: update `docs/PROGRESS.md`, `docs/HANDOVER.md`, `docs/DESIGN-NOTES.md`, ADRs and this file whenever a decision, command or rule changes. **This is enforced:** the pre-commit hook and a CI job (`docs`) fail any commit/PR that changes `src/`, `app/`, `supabase/migrations|functions`, `e2e/`, `.github/workflows`, `package.json` or `app.json` without also changing `docs/PROGRESS.md` and `docs/HANDOVER.md` (`scripts/docs-check.mjs`). Dependabot PRs are exempt; `SKIP_DOCS_CHECK=1 git commit` bypasses the hook locally in an emergency (CI still checks).
 
 ## Definition of done
 

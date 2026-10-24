@@ -36,6 +36,20 @@ jobs:
       # (node-forge, zod) and are not shipped in the app. See docs/decisions/0005.
       - run: npm audit --audit-level=critical
 
+  docs:
+    # Code changes must update docs/PROGRESS.md and docs/HANDOVER.md (Dependabot PRs are exempt).
+    if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+      - run: git diff --name-only "origin/${{ github.base_ref }}...HEAD" | node scripts/docs-check.mjs
+
   secrets:
     runs-on: ubuntu-latest
     timeout-minutes: 10
