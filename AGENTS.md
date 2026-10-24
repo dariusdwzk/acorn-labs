@@ -44,7 +44,7 @@ docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs
 ## Code standards
 
 - **Readable first.** Small, single-purpose functions. Files ≤ ~150 lines; one component per file.
-- **No raw colors, font sizes or spacing in components** — import tokens from `src/theme`.
+- **No raw colors or font sizes in components** — import tokens from `src/theme`. Repeated spacing uses tokens; a one-off Figma layout value may be a named constant at the top of that feature's file, with a comment naming the Figma node.
 - **No hard-coded user-facing text** — use `t('feature.key')`.
 - **TypeScript strict.** No `any`, no `!` non-null assertions on external data. Validate at boundaries.
 - **Logic out of JSX.** Put it in hooks / pure functions and unit-test those.

@@ -9,7 +9,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
 - [x] **Phase 5 — UI primitives**
 - [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
-- [ ] Phase 7 — Login UI
+- [x] **Phase 7 — Login UI** _(built + tested; device visual check pending)_
 - [ ] Phase 8 — Real auth
 - [ ] Phase 9 — Stubs, E2E, review → PR to `main`
 
@@ -70,3 +70,14 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - `npm run check`: 22 tests green; `expo-doctor` 20/20; iOS + Android bundles build.
 - Not yet verified on a real device/simulator (fonts, spacing, small-phone scroll). Do this when Xcode/Android Studio or Expo Go is available.
 - Next: Phase 7 — Login UI.
+
+### Phase 7 — Login UI
+
+- `src/features/auth/`: `LoginScreen` (back, wordmark, heading, form, social row, footer), `LoginForm` (email + password, show/hide, forgot link, submit), `validation` (pure functions).
+- Validation: blur-first for email (invalid format only once typed), on-submit for both fields, errors clear as the user types; double-submit guarded; keyboard "next"/"go" flow; password manager hints (`autoComplete`, `textContentType`).
+- `TextField` gained `error` (red border + alert text, `aria-invalid`) and `inputRef`; added `colors.error` (Figma has no error states — see DESIGN-NOTES).
+- Apple/Google buttons show a "coming soon" alert (pulled forward from Phase 9). Back → `router.back()`, or `/welcome` when there is no history. Subtitle typo fixed ("medications").
+- The submit handler is a no-op until Phase 8 wires real auth (Supabase).
+- 44 tests green (validation, form behaviour, screen navigation); iOS + Android bundle.
+- Not yet verified on a device vs Figma `141:370`.
+- Next: Phase 8 — real auth.

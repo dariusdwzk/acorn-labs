@@ -1,3 +1,3 @@
-import { ComingSoon } from '@/components/ComingSoon'
+import { LoginScreen } from '@/features/auth/LoginScreen'
 
-export default ComingSoon
+export default LoginScreen
