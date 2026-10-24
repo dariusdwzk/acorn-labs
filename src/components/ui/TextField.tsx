@@ -1,6 +1,6 @@
 import type { ComponentRef, ReactNode, Ref } from 'react'
 import { StyleSheet, Text, TextInput, View, type TextInputProps } from 'react-native'
-import { colors, radius, spacing, typography } from '@/theme'
+import { colors, controlHeight, radius, spacing, typography } from '@/theme'
 
 /** Instance type of the native text input (for `.focus()` etc.). */
 export type TextInputHandle = ComponentRef<typeof TextInput>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   container: { gap: 9 },
   label: { ...typography.label, color: colors.textBody },
   field: {
-    height: 56,
+    height: controlHeight,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing.lg,

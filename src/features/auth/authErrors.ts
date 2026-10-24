@@ -6,6 +6,8 @@ type AuthErrorLike = { code?: string; status?: number; name?: string }
 /**
  * Maps a Supabase auth error to a safe, generic UI message key.
  * Never surfaces the backend's raw message (it can reveal whether an account exists).
+ * Trade-off: `email_not_confirmed` has its own message. Supabase only returns it after the password
+ * was correct, so it does not let a stranger probe which emails are registered.
  */
 export function toLoginErrorKey(error: unknown): LoginErrorKey {
   const e = (error ?? {}) as AuthErrorLike

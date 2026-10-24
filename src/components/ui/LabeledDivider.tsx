@@ -3,7 +3,7 @@ import { colors, typography } from '@/theme'
 
 export function LabeledDivider({ label }: { label: string }) {
   return (
-    <View style={styles.row} accessibilityRole="none">
+    <View style={styles.row}>
       <View style={styles.line} />
       <Text style={styles.label}>{label}</Text>
       <View style={styles.line} />

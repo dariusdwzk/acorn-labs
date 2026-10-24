@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet } from 'react-native'
-import { colors, radius } from '@/theme'
+import { colors, pressedOpacity, radius } from '@/theme'
 import AppleSignIn from '../../../assets/svg/apple-sign-in.svg'
 import GoogleLogo from '../../../assets/svg/google-logo.svg'
 
@@ -35,5 +35,5 @@ const styles = StyleSheet.create({
     borderColor: colors.borderSubtle,
     borderRadius: radius.pill,
   },
-  pressed: { opacity: 0.7 },
+  pressed: { opacity: pressedOpacity },
 })

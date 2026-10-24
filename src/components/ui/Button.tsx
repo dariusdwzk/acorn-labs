@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text } from 'react-native'
-import { colors, radius, typography } from '@/theme'
+import { colors, controlHeight, pressedOpacity, radius, typography } from '@/theme'
 
 type Props = {
   label: string
@@ -38,13 +38,13 @@ export function Button({ label, onPress, variant = 'primary', loading = false, d
 
 const styles = StyleSheet.create({
   base: {
-    height: 56,
+    height: controlHeight,
     borderRadius: radius.button,
     alignItems: 'center',
     justifyContent: 'center',
   },
   primary: { backgroundColor: colors.primary },
   outline: { backgroundColor: colors.surface, borderWidth: 2, borderColor: colors.primary },
-  dimmed: { opacity: 0.7 },
+  dimmed: { opacity: pressedOpacity },
   label: typography.button,
 })

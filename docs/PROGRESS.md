@@ -105,3 +105,9 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
   - Sign-out failure no longer silent: `signOut` returns the error, `HomeScreen` shows a message and stays put; sign-out is `scope: 'local'` (this device only). +2 tests (82 total).
   - GitHub Actions in `ci.yml` pinned to commit SHAs (Dependabot keeps them updated).
 - Still open: `npm audit` gate at `critical` (ADR 0005).
+
+### Phase 9 (part 3) — Code review fixes
+
+- Two-axis `/code-review` (standards + spec) against the plan. Fixed: tokens for repeated control height / pressed opacity, removed dead code (`colors.social`, unused `HERO_HEIGHT` export, needless divider role), link tap targets ≥ 44pt, stable `useGoBack`, `LoginForm` message map (no nested ternary), documented the unconfirmed-email trade-off and Dependabot's react/react-native ignore.
+- Deliberately not changed: audit gate at `critical` (ADR 0005), explicit `router.replace('/')` after login, Terms link without a fake URL — all noted in HANDOVER.
+- Next: open PR `rebuild/v2` → `main`, watch the first CI run; Phase 3 waits on the dev Supabase project.

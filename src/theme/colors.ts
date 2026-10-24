@@ -13,7 +13,6 @@ export const colors = {
   borderSubtle: '#e7e5e4',
   // Not in Figma (no error states designed) — see docs/DESIGN-NOTES.md.
   error: '#b3261e',
-  social: { apple: '#000000' },
   sky: ['#d6e8ee', '#f3f0e2', '#8c8574'],
 } as const
 

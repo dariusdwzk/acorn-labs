@@ -5,6 +5,11 @@ import { Button, PasswordField, TextField, TextLink, type TextInputHandle } from
 import { colors, spacing, typography } from '@/theme'
 import { validateEmail, validatePassword, type FieldError } from './validation'
 
+const EMAIL_ERROR_KEYS = {
+  required: 'login.errors.emailRequired',
+  invalid: 'login.errors.emailInvalid',
+} as const satisfies Record<FieldError, string>
+
 export type Credentials = { email: string; password: string }
 
 type Props = {
@@ -23,12 +28,7 @@ export function LoginForm({ onSubmit, onForgotPassword, submitting = false, form
   const [emailError, setEmailError] = useState<FieldError | null>(null)
   const [passwordError, setPasswordError] = useState<FieldError | null>(null)
 
-  const emailMessage =
-    emailError === 'required'
-      ? t('login.errors.emailRequired')
-      : emailError === 'invalid'
-        ? t('login.errors.emailInvalid')
-        : undefined
+  const emailMessage = emailError ? t(EMAIL_ERROR_KEYS[emailError]) : undefined
   const passwordMessage = passwordError ? t('login.errors.passwordRequired') : undefined
 
   function handleSubmit() {

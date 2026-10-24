@@ -17,3 +17,9 @@ export const radius = {
 
 // Minimum accessible touch target (points).
 export const minTouchTarget = 44
+
+// Height of buttons and text fields (Figma Login frame 141:370).
+export const controlHeight = 56
+
+// Opacity for pressed / disabled controls (not in Figma; see docs/DESIGN-NOTES.md).
+export const pressedOpacity = 0.7

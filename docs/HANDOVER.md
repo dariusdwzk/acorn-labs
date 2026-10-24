@@ -48,6 +48,9 @@
 
 - `e2e/*.yaml` Maestro flows are **unrun**. Need: bundle ID/package in `app.json`, dev build, dev test user.
 
+- Verify on a device: Android keyboard behaviour (`Screen` uses no `behavior` on Android; plan said `height`), Android hardware back on Login/Register, small-phone scroll. `useLogin` keeps an explicit `router.replace('/')` after sign-in until the gate is confirmed on a device.
+- Terms link: with `EXPO_PUBLIC_TERMS_URL` unset the text is shown but not tappable (no fake URL shipped). Set the real URL before release.
+
 ## Key decisions
 
 See `docs/decisions/`.

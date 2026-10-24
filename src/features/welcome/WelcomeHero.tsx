@@ -5,7 +5,7 @@ import { useCanvasScale } from './canvas'
 import { heroLayers } from './heroLayers'
 
 /** Height of the illustration area in Figma points; below it the screen is plain background. */
-export const HERO_HEIGHT = 425
+const HERO_HEIGHT = 425
 /** The sky gradient spans the whole 852-pt Figma frame, so we draw it full height and clip it. */
 const FRAME_HEIGHT = 852
 
