@@ -1,6 +1,7 @@
 # Reusable prompts
 
 ## Phase prompt
+
 ```
 Read AGENTS.md, docs/HANDOVER.md and docs/PROGRESS.md first.
 Goal: Phase <N> — <name>. Scope: <bullets>. Out of scope: <bullets>.
@@ -14,17 +15,20 @@ Goal: Phase <N> — <name>. Scope: <bullets>. Out of scope: <bullets>.
 ```
 
 ## Bug fix
+
 ```
 Bug: <symptom, steps, expected>. Reproduce it with a failing test first, then fix the root cause,
 then show `npm run check` green. Don't refactor unrelated code.
 ```
 
 ## Review before PR
+
 ```
 Run /code-review, /security-review and /simplify on this branch. Fix confirmed findings; list the rest.
 ```
 
 ## End of session
+
 ```
 Use the handoff skill, update docs/HANDOVER.md and docs/PROGRESS.md, then I'll /clear.
 ```

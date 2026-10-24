@@ -3,27 +3,32 @@
 Single source of truth for **humans and AI agents**. Keep it short; details live in `docs/`.
 
 ## What Acorn is
+
 A medication-adherence app with light gamification. MVP loop: each scheduled dose taken keeps a
 **streak** going; the streak grows the user's current **plant**; a fully grown plant joins their
 **forest** and a new one starts. It handles **health data**, so security and privacy come first.
 
 ## Stack
+
 Expo (React Native, TypeScript strict) · expo-router · Supabase (Auth + Postgres + RLS) · Jest + React Native Testing Library · Maestro (E2E).
 Targets **iOS and Android**. Web is not a target.
 
 ## Before you start any task
+
 1. Read `docs/HANDOVER.md` (where we are) and `docs/PROGRESS.md` (what is done).
 2. Work on **one phase at a time**. Ask clarifying questions before coding; plan before editing.
 3. Never commit to `main`. Branch → PR → green CI → merge.
 
 ## Commands (once scaffolded in Phase 2)
-| Command | Purpose |
-|---|---|
+
+| Command         | Purpose                                                                     |
+| --------------- | --------------------------------------------------------------------------- |
 | `npm run check` | typecheck + lint + format check + tests. **Must pass before every commit.** |
-| `npm start` | Expo dev server |
-| `npm test` | Jest |
+| `npm start`     | Expo dev server                                                             |
+| `npm test`      | Jest                                                                        |
 
 ## Folder rules
+
 ```
 app/                 routes only — thin, no business logic
 src/theme/           design tokens (colors, typography, spacing). The ONLY place raw values live
@@ -37,6 +42,7 @@ docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs
 ```
 
 ## Code standards
+
 - **Readable first.** Small, single-purpose functions. Files ≤ ~150 lines; one component per file.
 - **No raw colors, font sizes or spacing in components** — import tokens from `src/theme`.
 - **No hard-coded user-facing text** — use `t('feature.key')`.
@@ -46,9 +52,10 @@ docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs
 - **No dead code, no commented-out code, no speculative abstractions** (YAGNI).
 - **Dependencies:** add with `npx expo install` (version-compatible). Justify each in the PR. Prefer Expo-maintained packages.
 - **Accessibility:** every touchable has `accessibilityRole` + `accessibilityLabel`; touch targets ≥ 44pt.
-- **Both platforms:** test iOS *and* Android. Use `Platform`-specific code only when unavoidable.
+- **Both platforms:** test iOS _and_ Android. Use `Platform`-specific code only when unavoidable.
 
 ## Security rules (non-negotiable)
+
 1. **No secrets in git or in `EXPO_PUBLIC_*`** — those ship inside the app. The client may only hold the Supabase URL + anon key. Server secrets live in Supabase secrets. Only `.env.example` is committed.
 2. **Tokens only in encrypted storage** (expo-secure-store). Never AsyncStorage.
 3. **Never log** tokens, passwords, emails, or any health data. No `console.*` in `src/` (use the dev-only logger).
@@ -60,13 +67,18 @@ docs/                PROGRESS, HANDOVER, DESIGN-NOTES, PROMPTS, decisions/ (ADRs
 9. Run `/security-review` before every PR to `main`.
 
 ## Phase workflow
+
 Each phase = one small PR. End every phase with:
+
 1. `npm run check` green.
 2. A 3–5 line summary in `docs/PROGRESS.md` (what changed, files, how to verify, next).
 3. `docs/HANDOVER.md` updated.
 4. One conventional commit — only after the owner approves.
 
+**Keep docs current as you go**, not just at phase end: update `docs/PROGRESS.md`, `docs/HANDOVER.md`, `docs/DESIGN-NOTES.md`, ADRs and this file whenever a decision, command or rule changes.
+
 ## Definition of done
+
 Works on iOS + Android · tests for logic · `npm run check` green · no secrets/PII in logs · a11y props set · docs updated · reviewed.
 
 See also: `SKILLS.md` (which skill to use when) · `docs/PROMPTS.md` (reusable prompts) · `docs/decisions/` (why we chose X).

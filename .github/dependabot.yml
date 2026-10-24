@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Expo pins versions per SDK; use `npx expo install --check` for SDK-managed packages.
+    ignore:
+      - dependency-name: expo
+        update-types: [version-update:semver-major]
+      - dependency-name: react
+      - dependency-name: react-native
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

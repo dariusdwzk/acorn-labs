@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Acorn Labs",
+    "slug": "acorn-labs",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "acornlabs",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": { "supportsTablet": false },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#f0e5c5",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": ["expo-router", "expo-font", "expo-secure-store", "expo-localization"],
+    "experiments": { "typedRoutes": true }
+  }
+}
