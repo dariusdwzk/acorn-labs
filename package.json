@@ -51,13 +51,15 @@
     "jest-expo": "~58.0.12",
     "lint-staged": "^17.6.0",
     "prettier": "^3.9.10",
+    "react-native-svg-transformer": "^1.5.3",
     "react-test-renderer": "19.3.0",
     "typescript": "~6.0.3"
   },
   "jest": {
     "preset": "jest-expo",
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
     },
     "setupFilesAfterEnv": [
       "@testing-library/react-native/matchers"

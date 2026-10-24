@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2 done · Phase 4 part 1 (theme/fonts) done · Phase 3 blocked on owner (acorn-dev Supabase project) · SVGs pending from owner · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2, 4(part 1), 5 done · next Phase 6 (Welcome screen) · Phase 3 blocked on owner (acorn-dev Supabase project) · Welcome SVGs pending from owner · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -10,7 +10,7 @@
 
 ## Next exact step
 
-0. Phase 4 part 2 needs the owner's Welcome illustration SVGs in `design/svg/`; meanwhile Phase 5 (UI primitives) can proceed using the theme.
+0. Owner: drop Welcome illustration SVGs in `design/svg/` (see its README). Next: Phase 6 Welcome screen (needs them for the hero) or Phase 7 Login UI (all assets ready).
 
 1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
 2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.

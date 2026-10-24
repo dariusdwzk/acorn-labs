@@ -7,7 +7,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - [x] **Phase 2 — Scaffold + CI** _(code done; branch protection + first CI run pending)_
 - [ ] Phase 3 — Database baseline (dev project, migrations, types)
 - [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
-- [ ] Phase 5 — UI primitives
+- [x] **Phase 5 — UI primitives**
 - [ ] Phase 6 — Welcome screen
 - [ ] Phase 7 — Login UI
 - [ ] Phase 8 — Real auth
@@ -47,3 +47,15 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - Pinned the React family exactly to the SDK (`react` / `react-dom` / `react-test-renderer` 19.3.0, `react-native` 0.88.0) — fixes npm peer conflicts without `--legacy-peer-deps`.
 - Tests: token tests (colors, scale order, touch target, every text style maps to a loaded font).
 - Pending: owner's SVG illustration files → `design/svg/` (then placed via `react-native-svg`).
+
+### Phase 4 (part 2) — SVG pipeline
+
+- Downloaded the 5 Login icons from Figma into `assets/svg/` (back chevron, acorn logo, eye, Apple, Google); scanned for scripts (none).
+- `react-native-svg-transformer` + `metro.config.js` + `.svgrrc.js` (strips web-only attrs) so `.svg` imports are components; Jest mock + `*.svg` typing.
+- Pending: owner's Welcome illustration SVGs → `design/svg/` (see its README).
+
+### Phase 5 — UI primitives
+
+- `src/components/ui/`: `Button` (primary/outline, loading/disabled), `TextField`, `PasswordField` (show/hide), `TextLink`, `LabeledDivider`, `SocialButton` (apple/google), `Screen` (safe area + keyboard + scroll). Tokens only; all text/labels passed in by props (i18n happens in features).
+- 9 new component tests (press, disabled/busy, label, password toggle, a11y roles). `npm run check`: 14 tests green.
+- Not yet visually compared with Figma (assembled into screens in Phases 6–7).
