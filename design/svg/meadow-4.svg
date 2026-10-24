@@ -1,0 +1,14 @@
+<svg width="113" height="16" viewBox="0 0 113 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="113" height="16" fill="#1E1E1E"/>
+<g id="Frame">
+<rect width="393" height="852" transform="translate(-160.5 -303)" fill="url(#paint0_linear_0_1)"/>
+<path id="meadow" d="M113 8.27587C99.6404 13.2414 97.4138 12.1379 63.4581 16C18.266 16 0 12.8465 0 8.27588C0 3.70524 7.68964 0 52.8818 0C98.0739 0 113 3.70523 113 8.27587Z" fill="black" fill-opacity="0.16"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="196.5" y1="0" x2="196.5" y2="852" gradientUnits="userSpaceOnUse">
+<stop stop-color="#D6E8EE"/>
+<stop offset="0.461538" stop-color="#F3F0E2"/>
+<stop offset="1" stop-color="#8C8574"/>
+</linearGradient>
+</defs>
+</svg>

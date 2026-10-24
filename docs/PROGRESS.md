@@ -52,7 +52,7 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 
 - Downloaded the 5 Login icons from Figma into `assets/svg/` (back chevron, acorn logo, eye, Apple, Google); scanned for scripts (none).
 - `react-native-svg-transformer` + `metro.config.js` + `.svgrrc.js` (strips web-only attrs) so `.svg` imports are components; Jest mock + `*.svg` typing.
-- Pending: owner's Welcome illustration SVGs → `design/svg/` (see its README).
+- Welcome illustration: 12 layer SVGs exported from Figma into `design/svg/` (sun, 3 clouds, 4 meadows, 3 trees, acorn); scanned, no scripts. Composed + moved to `assets/svg/` in Phase 6.
 
 ### Phase 5 — UI primitives
 

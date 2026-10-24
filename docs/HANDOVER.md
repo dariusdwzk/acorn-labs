@@ -1,6 +1,6 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2, 4(part 1), 5 done · next Phase 6 (Welcome screen) · Phase 3 blocked on owner (acorn-dev Supabase project) · Welcome SVGs pending from owner · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` · **Phase:** 2, 4(part 1), 5 done · next Phase 6 (Welcome screen) · Phase 3 blocked on owner (acorn-dev Supabase project) · Welcome SVGs exported from Figma (in `design/svg/`) · **Last commit:** see `git log` (Phase 2 commit)
 
 ## State
 
@@ -10,7 +10,7 @@
 
 ## Next exact step
 
-0. Owner: drop Welcome illustration SVGs in `design/svg/` (see its README). Next: Phase 6 Welcome screen (needs them for the hero) or Phase 7 Login UI (all assets ready).
+0. All assets ready (`assets/svg/` login icons, `design/svg/` hero layers). Next: Phase 6 Welcome screen, then Phase 7 Login UI. Hero layer positions: see Figma node `98:612` (layer x/y/size in the design-context output) — verify side by side with the Figma screenshot.
 
 1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
 2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.
@@ -34,6 +34,9 @@
 - React family pinned exactly (react/react-dom/react-test-renderer 19.3.0, RN 0.88.0). Don't bump one without the others; use `npx expo install --fix`.
 
 - 42dot Sans weights are ~2.6 MB each (include Korean glyphs) → ~7.8 MB of fonts in the bundle. Optimize later (Latin subset) before release.
+
+- **Figma MCP limit reached** (View seat, Professional plan) on 2026-10-24: further Figma tool calls may fail until it resets. Needed Welcome/Login data is already captured; avoid re-fetching.
+- Layer SVGs export at node-bounding-box size (e.g. meadow-1 is 366×267 though its node is 470×267) — check each against its Figma position when composing the hero.
 
 ## Key decisions
 

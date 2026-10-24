@@ -1,11 +1,8 @@
-# Drop Welcome-screen illustration SVGs here
+# Welcome-screen illustration SVGs (source files)
 
-Put your exported `.svg` files in this folder (any filenames are fine).
+Exported from Figma (file `oiO6LQnorIR7cPMi6A34l0`, Welcome frame `98:612`) on 2026-10-24 and scanned
+for scripts / embedded images (none). Layers: `sun`, `cloud-1..3`, `meadow-1..4`, `tree-large`,
+`tree-small`, `tree-right`, `acorn`.
 
-The Welcome screen (Figma node `98:612`) uses these layers:
-
-- sun, cloud 1, cloud 2, cloud 3
-- four meadow/hill shapes
-- trees (left large, left small, right) and the acorn mascot
-
-Don't worry about naming or sizing. Claude will match each file to its Figma layer, download any that are missing from Figma, check them for safety (no scripts), then move the final versions into `assets/svg/`.
+Phase 6 composes these in `WelcomeHero` and moves the final versions into `assets/svg/`.
+To replace any with your own export, drop a file here with the same name and tell Claude.
