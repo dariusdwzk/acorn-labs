@@ -6,6 +6,7 @@ import { useGoBack } from '@/lib/navigation'
 import { colors, spacing, typography } from '@/theme'
 import AcornLogo from '../../../assets/svg/acorn-logo.svg'
 import { LoginForm } from './LoginForm'
+import { useGoogleSignIn } from './useGoogleSignIn'
 import { useLogin } from './useLogin'
 
 // Figma one-off layout values (Login frame 141:370).
@@ -17,7 +18,9 @@ export function LoginScreen() {
   const router = useRouter()
 
   const goBack = useGoBack()
-  const { submit, submitting, errorKey } = useLogin()
+  const { submit, submitting, errorKey: loginErrorKey } = useLogin()
+  const { signIn: signInWithGoogle, errorKey: googleErrorKey } = useGoogleSignIn()
+  const errorKey = loginErrorKey ?? googleErrorKey
 
   return (
     <Screen>
@@ -51,11 +54,7 @@ export function LoginScreen() {
               label={t('login.apple')}
               onPress={() => Alert.alert(t('login.socialSoon'))}
             />
-            <SocialButton
-              provider="google"
-              label={t('login.google')}
-              onPress={() => Alert.alert(t('login.socialSoon'))}
-            />
+            <SocialButton provider="google" label={t('login.google')} onPress={signInWithGoogle} />
           </View>
         </View>
       </View>

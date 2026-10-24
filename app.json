@@ -8,9 +8,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.acornlabs.app"
     },
     "android": {
+      "package": "com.acornlabs.app",
       "adaptiveIcon": {
         "backgroundColor": "#f0e5c5",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -24,7 +26,13 @@
       "expo-font",
       "expo-secure-store",
       "expo-localization",
-      "expo-splash-screen"
+      "expo-splash-screen",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.538663286958-8ptulri533ifl3oqlgsncdoga9d9g3qr"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

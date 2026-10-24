@@ -50,6 +50,8 @@ export function parseSupabaseConfig(env: {
 // They must be read as literal `process.env.EXPO_PUBLIC_X` so the bundler can inline them.
 export const config = {
   termsUrl: parseHttpsUrl(process.env.EXPO_PUBLIC_TERMS_URL),
+  googleWebClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+  googleIosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
 } as const
 
 /** Validated lazily so screens and tests that don't touch Supabase never fail on missing env. */

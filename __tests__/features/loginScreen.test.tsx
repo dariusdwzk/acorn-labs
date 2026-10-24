@@ -5,7 +5,11 @@ import { LoginScreen } from '@/features/auth/LoginScreen'
 
 const mockRouter = { push: jest.fn(), back: jest.fn(), replace: jest.fn(), canGoBack: jest.fn() }
 const mockSignIn = jest.fn()
+const mockGoogleSignIn = jest.fn()
 jest.mock('@/features/auth/AuthProvider', () => ({ useAuth: () => ({ signIn: mockSignIn }) }))
+jest.mock('@/features/auth/useGoogleSignIn', () => ({
+  useGoogleSignIn: () => ({ signIn: mockGoogleSignIn, submitting: false, errorKey: null }),
+}))
 jest.mock('expo-router', () => ({ useRouter: () => mockRouter }))
 jest.mock(
   'react-native-safe-area-context',
@@ -53,10 +57,16 @@ describe('LoginScreen', () => {
     expect(screen.queryByText('raw backend text')).not.toBeOnTheScreen()
   })
 
-  it('tells the user social sign-in is coming soon', async () => {
+  it('tells the user Apple sign-in is coming soon', async () => {
     const alert = jest.spyOn(Alert, 'alert').mockImplementation(() => {})
     await render(<LoginScreen />)
     await fireEvent.press(screen.getByRole('button', { name: 'Continue with Apple' }))
-    expect(alert).toHaveBeenCalledWith('Apple and Google sign-in are coming soon.')
+    expect(alert).toHaveBeenCalledWith('Sign in with Apple is coming soon.')
+  })
+
+  it('starts Google sign-in', async () => {
+    await render(<LoginScreen />)
+    await fireEvent.press(screen.getByRole('button', { name: 'Continue with Google' }))
+    expect(mockGoogleSignIn).toHaveBeenCalled()
   })
 })
