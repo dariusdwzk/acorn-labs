@@ -7,6 +7,7 @@ Use **one skill per job**. Only skills from official or well-known sources are a
 | Clarify requirements before a phase | `grill-me` (`grill-with-docs` if the domain model is involved) | mattpocock/skills (in `.agents/skills`) |
 | Turn a phase into steps             | Plan mode + `superpowers:writing-plans`                        | obra/superpowers                        |
 | Explore a feature before building   | `feature-dev:feature-dev`                                      | Anthropic plugin                        |
+| Smallest-change coding style        | `ponytail` (always on in this project)                         | DietrichGebert/ponytail (GitHub)        |
 | Write logic                         | `superpowers:test-driven-development`                          | obra/superpowers                        |
 | Debug a failure                     | `superpowers:systematic-debugging`                             | obra/superpowers                        |
 | Before saying "done"                | `superpowers:verification-before-completion`                   | obra/superpowers                        |
@@ -17,6 +18,7 @@ Use **one skill per job**. Only skills from official or well-known sources are a
 | Domain terms and ADRs               | `domain-modeling`                                              | mattpocock/skills                       |
 | Module / interface design           | `codebase-design`                                              | mattpocock/skills                       |
 | Review before a PR                  | `/code-review`, `/security-review`, `/simplify`                | Anthropic built-ins                     |
+| Extra review / repo audit           | `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`        | DietrichGebert/ponytail (GitHub)        |
 | Commit                              | `/commit` (only when the owner approves)                       | commit-commands (Anthropic plugin)      |
 | Keep CLAUDE.md current              | `claude-md-management:claude-md-improver`                      | Anthropic plugin                        |
 | End of session                      | `handoff`                                                      | mattpocock/skills                       |

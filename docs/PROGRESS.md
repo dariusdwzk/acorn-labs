@@ -1,17 +1,20 @@
 # Progress
 
 Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each phase ends with a short summary here.
+`[x]` done · `[~]` partly done (see note) · `[ ]` not started.
+
+**Next up (from the product spec):** onboarding screens (name + DOB 18+ gate, consent, motivation intro, add medications, notification permission, first chest), then dose logging + game logic, Home, Forest, Calendar. See `docs/HANDOVER.md`.
 
 - [x] **Phase 0 — Safety net & reset**
 - [x] **Phase 1 — Docs & agent guardrails**
-- [x] **Phase 2 — Scaffold + CI** _(code done; branch protection + first CI run pending)_
-- [x] **Phase 3 — Database (onboarding scope)** _(migration written + tested; not yet applied to acorn-dev; types pending)_
-- [ ] **Phase 4 — Theme, fonts, assets** _(tokens + fonts done; SVG assets waiting on owner)_
+- [x] **Phase 2 — Scaffold + CI** _(done; CI green on PR #1; branch protection pending)_
+- [~] **Phase 3 — Database (onboarding scope)** _(migration written + tested; **not yet applied to acorn-dev**; types pending)_
+- [x] **Phase 4 — Theme, fonts, assets** _(done; Welcome hero + login icons exported from Figma)_
 - [x] **Phase 5 — UI primitives**
 - [x] **Phase 6 — Welcome screen** _(built + tested; device visual check pending)_
 - [x] **Phase 7 — Login UI** _(built + tested; device visual check pending)_
 - [x] **Phase 8 — Real auth** _(built + unit-tested with mocks; live login pending a dev Supabase project)_
-- [ ] **Phase 9 — Stubs, E2E, review → PR to `main`** _(stubs + E2E files done; reviews + PR pending)_
+- [~] **Phase 9 — Stubs, E2E, review, PR** _(stubs, reviews, draft PRs done; Maestro E2E written but unrun)_
 
 ## Phase summaries
 
@@ -120,3 +123,10 @@ Checklist of phases for the v2 rebuild (first feature: Welcome + Login). Each ph
 - Removed v1 `supabase-schema.sql` (superseded; still in tag `v1-final`).
 - Not done: apply to `acorn-dev` (owner: `supabase login` + `link` + `db push`), generate `src/types/database.ts`, `dose_logs`, account-deletion Edge Function.
 - Next: onboarding screens.
+
+### Session wrap-up (2026-10-24)
+
+- Config env var renamed to `EXPO_PUBLIC_SUPABASE_KEY` (the name Supabase's dashboard shows); holds the publishable key.
+- Owner's `ponytail` skill added (pinned commit, vetted) and enabled for this project; `SKILLS.md` updated.
+- Test user: none exists yet — the owner creates one in the dev project's dashboard (Authentication → Users, tick Auto Confirm).
+- Draft PRs: #1 on the owner's fork (`dariusdwzk/acorn-labs`) and one to the team lead's repo (`kubsgok/acorn`).

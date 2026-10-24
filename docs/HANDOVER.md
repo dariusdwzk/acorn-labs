@@ -1,63 +1,43 @@
 # Handover — pick up here
 
-**Branch:** `rebuild/v2` · **Phase:** 2–9 mostly done · Phase 3 (onboarding DB) written, not yet applied · next: onboarding screens · Phase 3 blocked on owner (acorn-dev Supabase project) · hero SVGs in `assets/svg/hero/` · **Last commit:** see `git log` (Phase 2 commit)
+**Branch:** `rebuild/v2` (v1 is at tag `v1-final`) · **Open PRs:** draft #1 on `dariusdwzk/acorn-labs`, and a draft to the team lead's `kubsgok/acorn` · **CI:** green
 
 ## State
 
-- Working Expo SDK 58 scaffold; `npm run check` green; bundles for iOS + Android. Minimal placeholder screen only.
-- Needs **Node 22** (`export PATH=/opt/homebrew/opt/node@22/bin:$PATH`); machine default is Node 25 (unsupported). See `docs/SETUP.md`.
-- Official skills installed and pinned (Expo x3, Supabase x2, React Native x1).
+- **Built (Phases 0–2, 4–8):** Expo SDK 58 app with the Welcome and Login screens (from Figma), shared UI components, theme tokens, i18n (English), Supabase email login with encrypted session storage, and a sign-in/sign-out route guard. 82 Jest tests + 11 database tests pass; `expo-doctor` clean; CI (typecheck, lint, format, tests, DB tests, audit, secret scan) green.
+- **Database (Phase 3):** migration `supabase/migrations/20261024085526_onboarding_schema.sql` (profiles, consents, medications, medication_times, plants, events; RLS + least-privilege grants), tested with `npm run test:db` (no Docker). **Not applied to `acorn-dev` yet.**
+- **Never seen on a device yet.** Nothing has been run in Expo Go or a simulator, and live login is untested.
+- **Placeholders:** `/register` and `/forgot-password` are "coming soon" screens; Apple/Google buttons show a "coming soon" alert; signed-in screen is a placeholder with Sign out.
 
-## Next exact step
+## Next exact steps
 
-**Apply the migration to `acorn-dev`** (owner, ~2 min; I can't — needs your login + DB password): `npx supabase login`, `npx supabase link --project-ref <ref>` (asks for the DB password), `npx supabase db push`. Then `npx supabase gen types typescript --linked > src/types/database.ts` (tell Claude when done).
+1. **Owner:** put the dev project's URL + publishable key in `.env.local` (`EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_KEY`), create a test user (Supabase dashboard → Authentication → Users → Add user, tick _Auto Confirm User_), run `npm start -c` with Node 22 and open in Expo Go. Compare Welcome with Figma `98:612` and Login with `141:370`; try login, restart-still-signed-in, sign out, wrong password.
+2. **Owner:** apply the migration: `npx supabase login`, `npx supabase link --project-ref <ref>` (asks for the DB password), `npx supabase db push`. Then Claude generates `src/types/database.ts` (`npx supabase gen types typescript --linked`).
+3. **Claude:** onboarding screens per the product spec, then dose logging + game logic (pure, tested), Home, Forest, Calendar.
+4. **Owner:** enable branch protection on `main` (require PR + checks `check`, `secrets`) once ready to merge.
 
-0. Run on a phone (`npm start`, Expo Go) and compare Welcome with Figma `98:612` — nothing has been seen on a device yet. Compare Login with `141:370` too. Then create `.env.local` (acorn-dev URL + publishable key) and a test user to try login live: log in → Home, kill app → still signed in, Sign out → Welcome, wrong password → friendly message.
+## Environment
 
-1. Owner: open a PR `rebuild/v2` → `main` early (or push and let CI run), confirm CI green, then enable branch protection (Settings → Branches → require PR + status checks `check`, `secrets`).
-2. Owner: create free `acorn-dev` Supabase project (Phase 3), install Xcode + Android Studio per `docs/SETUP.md`.
-3. Phase 3: Supabase CLI, baseline migration from `supabase-schema.sql`/prod, dev project, generated types.
+- Use **Node 22** for this project: `export PATH=/opt/homebrew/opt/node@22/bin:$PATH`. Machine default is Node 26 (Homebrew); both work. Details: `docs/SETUP.md`.
+- Env vars: `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_KEY` (publishable key `sb_publishable_…` or legacy anon key), `EXPO_PUBLIC_TERMS_URL`. The app throws a clear error at startup if the Supabase values are missing or invalid, and refuses secret keys. Never put secrets in `EXPO_PUBLIC_*`.
+- Xcode / Android Studio are not installed yet (simulators + Maestro E2E need them).
 
-## Open items
+## Open items and caveats
 
-- Owner to provide Welcome/Login SVGs in `design/svg/` (Phase 4).
-- Create free `acorn-dev` Supabase project (Phase 3).
-- Real Terms URL; real bundle ID / Android package (currently `com.anonymous.acorn` in v1).
-- Authorize `context7` MCP via `/mcp` (optional).
-- claude.ai connectors (AWS, Shopify, etc.) can't be disabled per project — turn off unused ones in claude.ai settings or `/mcp` to save tokens.
-- Before real patients: PDPA review, Supabase region → Singapore, Sentry, privacy policy.
-- `supabase/.temp` values (project ref, org id, pooler host) remain in `main` git history; no secrets, low risk.
-
-- 5 high `npm audit` advisories via `@expo/cli` (ADR 0005). Re-check after each Expo patch; tighten CI gate to `high` when clean.
-- Bundle ID / Android package not set in `app.json` yet (needed for dev builds / stores, not Expo Go).
-- Xcode and Android Studio not installed on this machine yet (`docs/SETUP.md`).
-- React Native / Expo versions pinned by SDK 58; Dependabot ignores majors of expo/react/react-native.
-
-- React family pinned exactly (react/react-dom/react-test-renderer 19.3.0, RN 0.88.0). Don't bump one without the others; use `npx expo install --fix`.
-
-- 42dot Sans weights are ~2.6 MB each (include Korean glyphs) → ~7.8 MB of fonts in the bundle. Optimize later (Latin subset) before release.
-
-- **Figma MCP limit reached** (View seat, Professional plan) on 2026-10-24: further Figma tool calls may fail until it resets. Needed Welcome/Login data is already captured; avoid re-fetching.
-- Layer SVGs export at node-bounding-box size (e.g. meadow-1 is 366×267 though its node is 470×267) — check each against its Figma position when composing the hero.
-
-- `app/index.tsx` is a temporary redirect to `/welcome`; `/register`, `/forgot-password` are `ComingSoon` placeholders (Phase 9 refines). Login is built but its submit is a no-op until Phase 8, which also replaces the redirect with the auth gate; Phase 9 refines the stubs.
-- Figma `download_assets` node exports include a baked dark background — use the clean per-layer assets from `get_design_context` instead.
+- **Product spec** (owner, 2026-10-24) drives onboarding: Apple/Google-only sign-in (email stays for dev only), name + date of birth (18+ enforced in the DB; DOB is stored — owner's choice, see ADR 0006), consent + privacy notice, motivation intro, add medications, notification permission, first chest/sapling. Game rules: ±2h dose window, strict adherent day, plant states 0→7, a missed day drops one state. Its open questions are listed in the spec.
+- **Apple/Google sign-in** needs an Apple Developer account, Google Cloud OAuth setup and a dev build (not Expo Go). The Figma login screen shows email/password; align the design with the spec.
+- **Verify on a device:** Android keyboard behaviour (`Screen` uses no `behavior` on Android), Android hardware back, small-phone scroll, and the auth gate (`Stack.Protected` + `router.replace('/')`, only unit-tested).
+- **Maestro E2E** (`e2e/*.yaml`) is written but unrun: needs a dev build, a bundle ID/package in `app.json`, and a dev test user.
+- **Terms link:** with `EXPO_PUBLIC_TERMS_URL` unset the text is not tappable (no fake URL shipped). Set the real URL before release. Real bundle ID / Android package also still to choose.
+- **npm audit:** 5 _high_ advisories via `@expo/cli` dev tooling; CI gates at `critical` (ADR 0005). Re-check after Expo patches.
+- **Fonts:** 42dot Sans weights are ~2.6 MB each (~7.8 MB total) — subset to Latin before release.
+- **Figma:** the MCP tool limit (View seat) was hit on 2026-10-24; needed data is already captured. `download_assets` node exports bake in a dark background — use per-layer assets from `get_design_context`. Design gaps (error/pressed/disabled states, password-hidden icon) are logged in `docs/DESIGN-NOTES.md`.
+- **Dependabot** ignores react / react-native / expo majors (the Expo SDK dictates them); the React family is pinned exactly — use `npx expo install --fix`.
+- **v1 Edge Function** `supabase/functions/claude` (Anthropic proxy) is still in the repo, unused by v2 so far; needed for the label scan or remove.
+- **Before real patients:** PDPA review (the age gate may need to be 21), Singapore region for Supabase, Sentry with PII scrubbing, privacy notice + beta terms, account-deletion Edge Function (needs the service role server-side).
+- `supabase/.temp` values (project ref, org id, pooler host; no secrets) remain in `main`'s git history.
 - Playwright MCP output (`.playwright-mcp/`) is git-ignored.
-
-- Login now calls Supabase (`useLogin`). Untested live — needs `.env.local`. The app **throws at startup** with a clear message if the Supabase env is missing/invalid (by design).
-- Auth-gate navigation (`Stack.Protected` + `router.replace('/')`) is only unit-tested; verify on a device.
-- Supabase email confirmation setting affects login: unconfirmed users get "confirm your email".
-
-- `e2e/*.yaml` Maestro flows are **unrun**. Need: bundle ID/package in `app.json`, dev build, dev test user.
-
-- Verify on a device: Android keyboard behaviour (`Screen` uses no `behavior` on Android; plan said `height`), Android hardware back on Login/Register, small-phone scroll. `useLogin` keeps an explicit `router.replace('/')` after sign-in until the gate is confirmed on a device.
-- Terms link: with `EXPO_PUBLIC_TERMS_URL` unset the text is shown but not tappable (no fake URL shipped). Set the real URL before release.
-
-- Product spec (owner, 2026-10-24) is the source for onboarding: Apple/Google-only sign-in (email stays for dev only), name + DOB (18+), consent + privacy notice, motivation intro, add medications, notification permission, first chest/sapling. Game rules: ±2h dose window, strict adherent day, plant 0→7, missed day drops one state. Open questions are listed in the spec.
-- v1 Edge Function `supabase/functions/claude` (Anthropic proxy) is still in the repo, unused by v2 so far; needed later for label scan or remove.
-
-- Env var is `EXPO_PUBLIC_SUPABASE_KEY` (matches the name the Supabase dashboard shows under Connect → Framework); it holds the publishable key (`sb_publishable_…`) or the legacy anon key. It was briefly `EXPO_PUBLIC_SUPABASE_ANON_KEY`.
 
 ## Key decisions
 
-See `docs/decisions/`.
+See `docs/decisions/` (ADRs 0001–0006).

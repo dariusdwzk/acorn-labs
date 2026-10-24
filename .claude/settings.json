@@ -1,6 +1,6 @@
 {
   "enabledPlugins": {
-    "ponytail@ponytail": false
+    "ponytail@ponytail": true
   },
   "permissions": {
     "deny": [
